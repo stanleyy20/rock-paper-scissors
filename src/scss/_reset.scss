@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-size: 16px;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(at top, $background);
+    overflow: hidden;
+}
