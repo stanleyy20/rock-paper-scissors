@@ -23,19 +23,25 @@
 
         <main class="main">
             <div class="main__container">
-                <img class="main__bg-image" src="./public/images/bg-triangle.svg" alt="triangle" />
-                <div class="main__choose main__choose--rock">
-                    <img src="./public/images/icon-rock.svg" alt="rock" />
-                </div>
-                <div class="main__choose main__choose--paper">
-                    <img src="./public/images/icon-paper.svg" alt="paper" />
-                </div>
-                <div class="main__choose main__choose--scissors">
-                    <img src="./public/images/icon-scissors.svg" alt="scissors" />
+                <div class="main__border">
+                    <div class="main__choose main__choose--rock">
+                        <img src="./public/images/icon-rock.svg" alt="rock" />
+                    </div>
                 </div>
 
-                <!-- <button class="choose__btn">RULES</button> -->
+                <div class="main__border">
+                    <div class="main__choose main__choose--paper">
+                        <img src="./public/images/icon-paper.svg" alt="paper" />
+                    </div>
+                </div>
+
+                <div class="main__border">
+                    <div class="main__choose main__choose--scissors">
+                        <img src="./public/images/icon-scissors.svg" alt="scissors" />
+                    </div>
+                </div>
             </div>
+            <button class="main__btn">RULES</button>
         </main>
 
         <script type="module" src="/src/ts/main.ts"></script>
