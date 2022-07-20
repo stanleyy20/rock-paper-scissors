@@ -1,0 +1,31 @@
+.main-second {
+    width: 80%;
+    margin: 100px auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    &__container {
+        aspect-ratio: 1/1;
+        width: 50%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    &__option-palece {
+        width: 70%;
+        height: 70%;
+        background-color: rgba($color: #000000, $alpha: 0.3);
+        border-radius: 50%;
+    }
+
+    h2 {
+        color: $white-text;
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+}
