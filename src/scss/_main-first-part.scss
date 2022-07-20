@@ -1,0 +1,92 @@
+.main {
+    position: relative;
+    width: 100%;
+    margin-top: 100px;
+    height: 70%;
+
+    @media (min-width: $medium) {
+        margin-top: 150px;
+    }
+
+    &__container {
+        background-image: url('../../public/images/bg-triangle.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        aspect-ratio: 1/1;
+        position: relative;
+        width: 60%;
+        margin: 0 auto;
+
+        @media (min-width: $medium) {
+            width: 30%;
+        }
+    }
+
+    &__choose-bg {
+        width: 70%;
+        height: 70%;
+        border-radius: 50%;
+        background-color: $white-text;
+    }
+
+    &__choose {
+        position: absolute;
+        cursor: pointer;
+        width: 45%;
+        height: 45%;
+        background-color: $white-text;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // box-shadow: 1px 5px 5px #0000006b;
+
+        &--scissors {
+            right: 0;
+            transform: translate(25%, -25%);
+            background-image: linear-gradient($scissors);
+        }
+
+        &--rock {
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-image: linear-gradient($rock);
+        }
+
+        &--paper {
+            transform: translate(-25%, -25%);
+            background-image: linear-gradient($paper);
+        }
+
+        img {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 35%;
+        }
+    }
+
+    &__btn {
+        position: absolute;
+        bottom: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        cursor: pointer;
+        background-color: transparent;
+        border: 2px solid $header-outline;
+        padding: 10px 30px;
+        color: $white-text;
+        border-radius: 10px;
+        font-weight: 700;
+        letter-spacing: 2px;
+
+        @media (min-width: $medium) {
+            bottom: 10%;
+            left: 90%;
+        }
+    }
+}

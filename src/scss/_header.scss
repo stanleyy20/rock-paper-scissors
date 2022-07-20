@@ -9,6 +9,10 @@
         border-radius: 6px;
         justify-content: space-between;
         padding: 10px;
+
+        @media (min-width: $medium) {
+            width: 50%;
+        }
     }
 
     &__title {
