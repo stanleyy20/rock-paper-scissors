@@ -5,6 +5,10 @@ type selectors = {
     SCORE: string;
     MAIN_FIRST: string;
     MAIN_SECOND: string;
+    PLAYER_CHOOSE_CONTAINER: string;
+    AI_CHOOSE_CONTAINER: string;
+    WIN_OR_LOSE_TITLE: string;
+    RESET_BUTTON: string;
 };
 
 type className = {
@@ -19,6 +23,10 @@ export const SELECTOR: selectors = {
     SCORE: '#score',
     MAIN_FIRST: '.main',
     MAIN_SECOND: '.main-second',
+    PLAYER_CHOOSE_CONTAINER: '#player',
+    AI_CHOOSE_CONTAINER: '#ai',
+    WIN_OR_LOSE_TITLE: '.main-second__title-h2',
+    RESET_BUTTON: '.main-second__btn',
 };
 
 export const CLASS_NAME: className = {
