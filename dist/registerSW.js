@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/rock-paper-scissors/sw.js', { scope: '/rock-paper-scissors/' })})}
