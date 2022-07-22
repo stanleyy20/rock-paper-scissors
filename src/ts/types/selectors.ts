@@ -3,8 +3,8 @@ type selectors = {
     PAPER: string;
     SCISSORS: string;
     SCORE: string;
-    MAIN_FIRST: string;
-    MAIN_SECOND: string;
+    SELECTION_SCREEN: string;
+    RESULT_SCREEN: string;
     PLAYER_CHOOSE_CONTAINER: string;
     AI_CHOOSE_CONTAINER: string;
     WIN_OR_LOSE_TITLE: string;
@@ -12,8 +12,8 @@ type selectors = {
 };
 
 type className = {
-    FIRST_SCREEN: string;
-    SECOND_SCREEN: string;
+    SELECTION_SCREEN_CLASS_HIDEN: string;
+    RESULT_SCREEN_CLASS_HIDEN: string;
 };
 
 export const SELECTOR: selectors = {
@@ -21,8 +21,8 @@ export const SELECTOR: selectors = {
     PAPER: '#paper',
     SCISSORS: '#scissors',
     SCORE: '#score',
-    MAIN_FIRST: '.main',
-    MAIN_SECOND: '.main-second',
+    SELECTION_SCREEN: '.main',
+    RESULT_SCREEN: '.main-second',
     PLAYER_CHOOSE_CONTAINER: '#player',
     AI_CHOOSE_CONTAINER: '#ai',
     WIN_OR_LOSE_TITLE: '.main-second__title-h2',
@@ -30,6 +30,6 @@ export const SELECTOR: selectors = {
 };
 
 export const CLASS_NAME: className = {
-    FIRST_SCREEN: 'main--hiden',
-    SECOND_SCREEN: 'main-second--hiden',
+    SELECTION_SCREEN_CLASS_HIDEN: 'main--hiden',
+    RESULT_SCREEN_CLASS_HIDEN: 'main-second--hiden',
 };
