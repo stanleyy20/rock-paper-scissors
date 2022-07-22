@@ -5,15 +5,15 @@ const {
     ROCK,
     SCISSORS,
     SCORE,
-    MAIN_FIRST,
-    MAIN_SECOND,
+    SELECTION_SCREEN,
+    RESULT_SCREEN,
     PLAYER_CHOOSE_CONTAINER,
     AI_CHOOSE_CONTAINER,
     WIN_OR_LOSE_TITLE,
     RESET_BUTTON,
 } = SELECTOR;
 
-const { FIRST_SCREEN, SECOND_SCREEN } = CLASS_NAME;
+const { SELECTION_SCREEN_CLASS_HIDEN, RESULT_SCREEN_CLASS_HIDEN } = CLASS_NAME;
 
 export class StartGame {
     //buttons
@@ -26,13 +26,14 @@ export class StartGame {
     selectionScreen: HTMLDivElement | null;
     resultScreen: HTMLDivElement | null;
     playerChoiceContainer: HTMLDivElement | null;
-    aioChoiceContainer: HTMLDivElement | null;
+    aiChoiceContainer: HTMLDivElement | null;
     winOrLoseTitle: HTMLDivElement | null;
     // initial state
     initialScore: number;
     choiceForAI: Array<string>;
     choiceAI: string;
     playerChoice: string;
+    playerOrAi: boolean;
 
     constructor() {
         this.rockButton = this.bindDomElement(ROCK);
@@ -41,16 +42,17 @@ export class StartGame {
         this.playAgainBtn = this.bindDomElement(RESET_BUTTON);
 
         this.score = this.bindDomElement(SCORE);
-        this.selectionScreen = this.bindDomElement(MAIN_FIRST);
-        this.resultScreen = this.bindDomElement(MAIN_SECOND);
+        this.selectionScreen = this.bindDomElement(SELECTION_SCREEN);
+        this.resultScreen = this.bindDomElement(RESULT_SCREEN);
         this.playerChoiceContainer = this.bindDomElement(PLAYER_CHOOSE_CONTAINER);
-        this.aioChoiceContainer = this.bindDomElement(AI_CHOOSE_CONTAINER);
+        this.aiChoiceContainer = this.bindDomElement(AI_CHOOSE_CONTAINER);
         this.winOrLoseTitle = this.bindDomElement(WIN_OR_LOSE_TITLE);
 
         this.initialScore = Number(localStorage.getItem('score'));
         this.choiceForAI = ['rock', 'paper', 'scissors'];
         this.choiceAI = '';
         this.playerChoice = '';
+        this.playerOrAi = true;
     }
 
     bindDomElement(selector: string): HTMLDivElement | null {
@@ -75,36 +77,7 @@ export class StartGame {
 
     randomChoiceForAI(options: Array<string>) {
         const index = Math.floor(Math.random() * options.length);
-        this.choiceAI = options[index];
-    }
-
-    bindFunctionToButton(
-        btn: HTMLDivElement | null,
-        fn: (elemnet: HTMLDivElement | null, className: string) => void,
-        fn2: (elemnet: HTMLDivElement | null, className: string) => void,
-        fn3: (event: any, container: HTMLDivElement | null, player: string) => void,
-        fn4: (
-            event: any,
-            AI: string,
-            textContainer: HTMLDivElement | null,
-            score: HTMLDivElement | null,
-            initialScore: number
-        ) => void,
-        fn5: (AIChoice: string, container: HTMLDivElement | null) => void
-    ) {
-        if (btn === null) {
-            console.warn(`don't find button`);
-            return null;
-        }
-
-        btn.addEventListener('click', (event: any) => {
-            fn(this.selectionScreen, FIRST_SCREEN);
-            fn2(this.resultScreen, SECOND_SCREEN);
-            fn3(event, this.playerChoiceContainer, this.playerChoice);
-            fn4(event, this.choiceAI, this.winOrLoseTitle, this.score, this.initialScore);
-            fn5(this.choiceAI, this.aioChoiceContainer);
-        });
-        return null;
+        return (this.choiceAI = options[index]);
     }
 
     showHideScren(elemnet: HTMLDivElement | null, className: string) {
@@ -116,26 +89,30 @@ export class StartGame {
         return null;
     }
 
-    hideElement(elemnet: HTMLDivElement | null, className: string) {
-        if (elemnet === null) {
-            console.warn('dont find html element');
-            return null;
+    renderPlayersChoice(container: HTMLDivElement | null, event: any, AI: string, player: boolean) {
+        const main = document.createElement('div');
+        const choice = document.createElement('div');
+        const img: HTMLImageElement = document.createElement('img');
+
+        const classNameModifire = player ? event.target.getAttribute('data-choice') : AI;
+
+        main.classList.add(
+            'main__choose',
+            'main__choose--position',
+            `main__choose--${classNameModifire}`
+        );
+        choice.classList.add('main__choose-bg');
+        img.src = `./public/images/icon-${classNameModifire}.svg`;
+
+        main.appendChild(choice);
+        choice.appendChild(img);
+
+        if (container !== null) {
+            container.appendChild(main);
         }
-        elemnet.classList.toggle(className);
-        return null;
     }
 
-    showElement(elemnet: HTMLDivElement | null, className: string) {
-        if (elemnet === null) {
-            console.warn('dont find html element');
-            return null;
-        }
-
-        elemnet.classList.toggle(className);
-        return null;
-    }
-
-    whoWin(
+    winOrLoseRules(
         event: any,
         AI: string,
         textContainer: HTMLDivElement | null,
@@ -177,91 +154,100 @@ export class StartGame {
         return null;
     }
 
-    addPlayerChocieToScreen(event: any, container: HTMLDivElement | null) {
-        const main = document.createElement('div');
-        const choice = document.createElement('div');
-        const img: HTMLImageElement = document.createElement('img');
-
-        const playerChoice = event.target.getAttribute('data-choice');
-
-        main.classList.add(
-            'main__choose',
-            `main__choose--${playerChoice}`,
-            'main__choose--position'
-        );
-        choice.classList.add('main__choose-bg');
-        img.src = `./public/images/icon-${playerChoice}.svg`;
-
-        main.appendChild(choice);
-        choice.appendChild(img);
-
-        if (container !== null) {
-            container.appendChild(main);
+    bindFunctionToGameButton(
+        button: HTMLDivElement | null,
+        showHideScreen: (elemnet: HTMLDivElement | null, className: string) => void,
+        showHideScreenSecond: (elemnet: HTMLDivElement | null, className: string) => void,
+        winOrLoseRules: (
+            event: any,
+            AI: string,
+            textContainer: HTMLDivElement | null,
+            score: HTMLDivElement | null,
+            initialScore: number
+        ) => void,
+        renderPlayerChoice: (
+            container: HTMLDivElement | null,
+            event: any,
+            AI: string,
+            playerOrAi: boolean
+        ) => void,
+        renderAiChoice: (
+            container: HTMLDivElement | null,
+            event: any,
+            AI: string,
+            playerOrAi: boolean
+        ) => void
+    ) {
+        if (button === null) {
+            console.warn(`don't find button`);
+            return null;
         }
-    }
 
-    addAIChocieToScreen(option: string, container: HTMLDivElement | null) {
-        const main = document.createElement('div');
-        const choice = document.createElement('div');
-        const img: HTMLImageElement = document.createElement('img');
+        button.addEventListener('click', (event: any) => {
+            showHideScreen(this.selectionScreen, SELECTION_SCREEN_CLASS_HIDEN);
 
-        main.classList.add('main__choose', `main__choose--${option}`, 'main__choose--position');
-        choice.classList.add('main__choose-bg');
-        img.src = `./public/images/icon-${option}.svg`;
+            showHideScreenSecond(this.resultScreen, RESULT_SCREEN_CLASS_HIDEN);
 
-        main.appendChild(choice);
-        choice.appendChild(img);
+            winOrLoseRules(
+                event,
+                this.choiceAI,
+                this.winOrLoseTitle,
+                this.score,
+                this.initialScore
+            );
+            renderPlayerChoice(this.playerChoiceContainer, event, this.choiceAI, this.playerOrAi);
 
-        if (container !== null) {
-            container.appendChild(main);
-        }
+            renderAiChoice(this.aiChoiceContainer, event, this.choiceAI, !this.playerOrAi);
+        });
+        return null;
     }
 
     initial() {
-        this.bindFunctionToButton(
+        this.randomChoiceForAI(this.choiceForAI);
+        this.playAgain();
+        this.renderScore();
+
+        this.bindFunctionToGameButton(
             this.rockButton,
-            this.hideElement,
-            this.showElement,
-            this.addPlayerChocieToScreen,
-            this.whoWin,
-            this.addAIChocieToScreen
+            this.showHideScren,
+            this.showHideScren,
+            this.winOrLoseRules,
+            this.renderPlayersChoice,
+            this.renderPlayersChoice
         );
-        this.bindFunctionToButton(
+        this.bindFunctionToGameButton(
             this.paperButton,
-            this.hideElement,
-            this.showElement,
-            this.addPlayerChocieToScreen,
-            this.whoWin,
-            this.addAIChocieToScreen
+            this.showHideScren,
+            this.showHideScren,
+            this.winOrLoseRules,
+            this.renderPlayersChoice,
+            this.renderPlayersChoice
         );
-        this.bindFunctionToButton(
+        this.bindFunctionToGameButton(
             this.scissorsButton,
-            this.hideElement,
-            this.showElement,
-            this.addPlayerChocieToScreen,
-            this.whoWin,
-            this.addAIChocieToScreen
+            this.showHideScren,
+            this.showHideScren,
+            this.winOrLoseRules,
+            this.renderPlayersChoice,
+            this.renderPlayersChoice
         );
     }
 
-    clear() {
+    playAgain() {
         this.playAgainBtn?.addEventListener('click', () => {
-            if (this.playerChoiceContainer !== null && this.aioChoiceContainer !== null) {
+            if (this.playerChoiceContainer !== null && this.aiChoiceContainer !== null) {
                 this.playerChoiceContainer.innerText = '';
-                this.aioChoiceContainer.innerText = '';
+                this.aiChoiceContainer.innerText = '';
             }
 
             this.randomChoiceForAI(this.choiceForAI);
-            this.hideElement(this.resultScreen, SECOND_SCREEN);
-            this.hideElement(this.selectionScreen, FIRST_SCREEN);
+            this.showHideScren(this.resultScreen, RESULT_SCREEN_CLASS_HIDEN);
+            this.showHideScren(this.selectionScreen, SELECTION_SCREEN_CLASS_HIDEN);
             this.renderScore();
         });
     }
 
     run() {
-        this.randomChoiceForAI(this.choiceForAI);
-        this.renderScore();
         this.initial();
-        this.clear();
     }
 }
