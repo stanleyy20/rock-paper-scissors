@@ -106,6 +106,8 @@ export class StartGame {
         const img: HTMLImageElement = document.createElement('img');
 
         const classNameModifire = player ? event.target.getAttribute('data-choice') : AI;
+        const imgUrl = new URL(`/public/images/icon-${classNameModifire}.svg`, import.meta.url)
+            .href;
 
         main.classList.add(
             'main__choose',
@@ -113,7 +115,7 @@ export class StartGame {
             `main__choose--${classNameModifire}`
         );
         choice.classList.add('main__choose-bg');
-        img.src = `./public/images/icon-${classNameModifire}.svg`;
+        img.src = imgUrl;
 
         main.appendChild(choice);
         choice.appendChild(img);
