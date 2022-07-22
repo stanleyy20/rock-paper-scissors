@@ -5,14 +5,11 @@
         <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://kit.fontawesome.com/1b908bc4f4.js" crossorigin="anonymous"></script>
+        <link rel="manifest" href="manifest.json" />
         <title>Rock-Paper-Scissor</title>
-        <script
-            type="module"
-            crossorigin
-            src="/rock-paper-scissors/assets/index.8e6cb3d8.js"
-        ></script>
-        <link rel="stylesheet" href="/rock-paper-scissors/assets/index.778c15e2.css" />
-    </head>
+      <script type="module" crossorigin src="/rock-paper-scissors/assets/index.e8145dbd.js"></script>
+      <link rel="stylesheet" href="/rock-paper-scissors/assets/index.778c15e2.css">
+    <link rel="manifest" href="/rock-paper-scissors/manifest.webmanifest"><script src="/rock-paper-scissors/registerSW.js"></script></head>
     <body>
         <header class="header">
             <div class="header__container">
@@ -40,11 +37,7 @@
             <div class="main__container">
                 <div class="main__choose main__choose--rock" id="rock" data-choice="rock">
                     <div class="main__choose-bg">
-                        <img
-                            src="/rock-paper-scissors/assets/icon-rock.e16feca1.svg"
-                            alt="rock"
-                            data-choice="rock"
-                        />
+                        <img src="/rock-paper-scissors/assets/icon-rock.e16feca1.svg" alt="rock" data-choice="rock" />
                     </div>
                 </div>
 
@@ -91,6 +84,8 @@
             </div>
         </main>
 
-        <button class="main__btn" id="rules">RULES</button>
+        <button class="main__btn" id="rules" data-toggle="tab">RULES</button>
+
+        
     </body>
 </html>
