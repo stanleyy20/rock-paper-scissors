@@ -9,11 +9,15 @@ type selectors = {
     AI_CHOOSE_CONTAINER: string;
     WIN_OR_LOSE_TITLE: string;
     RESET_BUTTON: string;
+    RULES_BUTTON: string;
+    POPUP: string;
+    CLOSE_POPUP_BUTTON: string;
 };
 
 type className = {
     SELECTION_SCREEN_CLASS_HIDEN: string;
     RESULT_SCREEN_CLASS_HIDEN: string;
+    POPUP_HIDEN: string;
 };
 
 export const SELECTOR: selectors = {
@@ -27,9 +31,13 @@ export const SELECTOR: selectors = {
     AI_CHOOSE_CONTAINER: '#ai',
     WIN_OR_LOSE_TITLE: '.main-second__title-h2',
     RESET_BUTTON: '.main-second__btn',
+    RULES_BUTTON: '#rules',
+    POPUP: '.popup',
+    CLOSE_POPUP_BUTTON: '.close-btn',
 };
 
 export const CLASS_NAME: className = {
     SELECTION_SCREEN_CLASS_HIDEN: 'main--hiden',
     RESULT_SCREEN_CLASS_HIDEN: 'main-second--hiden',
+    POPUP_HIDEN: 'popup--hiden',
 };

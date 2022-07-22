@@ -11,16 +11,22 @@ const {
     AI_CHOOSE_CONTAINER,
     WIN_OR_LOSE_TITLE,
     RESET_BUTTON,
+    RULES_BUTTON,
+    POPUP,
+    CLOSE_POPUP_BUTTON,
 } = SELECTOR;
 
-const { SELECTION_SCREEN_CLASS_HIDEN, RESULT_SCREEN_CLASS_HIDEN } = CLASS_NAME;
+const { SELECTION_SCREEN_CLASS_HIDEN, RESULT_SCREEN_CLASS_HIDEN, POPUP_HIDEN } = CLASS_NAME;
 
 export class StartGame {
     //buttons
     rockButton: HTMLDivElement | null;
     paperButton: HTMLDivElement | null;
     scissorsButton: HTMLDivElement | null;
-    playAgainBtn: HTMLDivElement | null;
+    playAgainButton: HTMLDivElement | null;
+    rulesButton: HTMLDivElement | null;
+    closePopupButton: HTMLDivElement | null;
+
     //html div elemnts
     score: HTMLDivElement | null;
     selectionScreen: HTMLDivElement | null;
@@ -28,6 +34,7 @@ export class StartGame {
     playerChoiceContainer: HTMLDivElement | null;
     aiChoiceContainer: HTMLDivElement | null;
     winOrLoseTitle: HTMLDivElement | null;
+    popup: HTMLDivElement | null;
     // initial state
     initialScore: number;
     choiceForAI: Array<string>;
@@ -39,7 +46,9 @@ export class StartGame {
         this.rockButton = this.bindDomElement(ROCK);
         this.paperButton = this.bindDomElement(PAPER);
         this.scissorsButton = this.bindDomElement(SCISSORS);
-        this.playAgainBtn = this.bindDomElement(RESET_BUTTON);
+        this.playAgainButton = this.bindDomElement(RESET_BUTTON);
+        this.rulesButton = this.bindDomElement(RULES_BUTTON);
+        this.closePopupButton = this.bindDomElement(CLOSE_POPUP_BUTTON);
 
         this.score = this.bindDomElement(SCORE);
         this.selectionScreen = this.bindDomElement(SELECTION_SCREEN);
@@ -47,6 +56,7 @@ export class StartGame {
         this.playerChoiceContainer = this.bindDomElement(PLAYER_CHOOSE_CONTAINER);
         this.aiChoiceContainer = this.bindDomElement(AI_CHOOSE_CONTAINER);
         this.winOrLoseTitle = this.bindDomElement(WIN_OR_LOSE_TITLE);
+        this.popup = this.bindDomElement(POPUP);
 
         this.initialScore = Number(localStorage.getItem('score'));
         this.choiceForAI = ['rock', 'paper', 'scissors'];
@@ -80,11 +90,12 @@ export class StartGame {
         return (this.choiceAI = options[index]);
     }
 
-    showHideScren(elemnet: HTMLDivElement | null, className: string) {
+    showHide(elemnet: HTMLDivElement | null, className: string) {
         if (elemnet === null) {
             console.warn('dont find html element');
             return null;
         }
+
         elemnet.classList.toggle(className);
         return null;
     }
@@ -199,7 +210,31 @@ export class StartGame {
 
             renderAiChoice(this.aiChoiceContainer, event, this.choiceAI, !this.playerOrAi);
         });
+
         return null;
+    }
+
+    bindFunctionToPopUpButton(
+        button: HTMLDivElement | null,
+        showHidePopUp: (elemnet: HTMLDivElement | null, className: string) => void
+    ) {
+        button?.addEventListener('click', () => {
+            showHidePopUp(this.popup, POPUP_HIDEN);
+        });
+    }
+
+    playAgain() {
+        this.playAgainButton?.addEventListener('click', () => {
+            if (this.playerChoiceContainer !== null && this.aiChoiceContainer !== null) {
+                this.playerChoiceContainer.innerText = '';
+                this.aiChoiceContainer.innerText = '';
+            }
+
+            this.randomChoiceForAI(this.choiceForAI);
+            this.showHide(this.resultScreen, RESULT_SCREEN_CLASS_HIDEN);
+            this.showHide(this.selectionScreen, SELECTION_SCREEN_CLASS_HIDEN);
+            this.renderScore();
+        });
     }
 
     initial() {
@@ -209,42 +244,31 @@ export class StartGame {
 
         this.bindFunctionToGameButton(
             this.rockButton,
-            this.showHideScren,
-            this.showHideScren,
+            this.showHide,
+            this.showHide,
             this.winOrLoseRules,
             this.renderPlayersChoice,
             this.renderPlayersChoice
         );
         this.bindFunctionToGameButton(
             this.paperButton,
-            this.showHideScren,
-            this.showHideScren,
+            this.showHide,
+            this.showHide,
             this.winOrLoseRules,
             this.renderPlayersChoice,
             this.renderPlayersChoice
         );
         this.bindFunctionToGameButton(
             this.scissorsButton,
-            this.showHideScren,
-            this.showHideScren,
+            this.showHide,
+            this.showHide,
             this.winOrLoseRules,
             this.renderPlayersChoice,
             this.renderPlayersChoice
         );
-    }
 
-    playAgain() {
-        this.playAgainBtn?.addEventListener('click', () => {
-            if (this.playerChoiceContainer !== null && this.aiChoiceContainer !== null) {
-                this.playerChoiceContainer.innerText = '';
-                this.aiChoiceContainer.innerText = '';
-            }
-
-            this.randomChoiceForAI(this.choiceForAI);
-            this.showHideScren(this.resultScreen, RESULT_SCREEN_CLASS_HIDEN);
-            this.showHideScren(this.selectionScreen, SELECTION_SCREEN_CLASS_HIDEN);
-            this.renderScore();
-        });
+        this.bindFunctionToPopUpButton(this.rulesButton, this.showHide);
+        this.bindFunctionToPopUpButton(this.closePopupButton, this.showHide);
     }
 
     run() {

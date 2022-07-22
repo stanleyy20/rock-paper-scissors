@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://kit.fontawesome.com/1b908bc4f4.js" crossorigin="anonymous"></script>
         <title>Rock-Paper-Scissor</title>
     </head>
     <body>
@@ -20,6 +21,12 @@
                 </div>
             </div>
         </header>
+
+        <div class="popup popup--hiden">
+            <h2>RULES</h2>
+            <img src="./public/images/image-rules.svg" alt="rules" />
+            <i class="fa-solid fa-xmark close-btn"></i>
+        </div>
 
         <main class="main">
             <div class="main__container">
@@ -51,7 +58,6 @@
                     </div>
                 </div>
             </div>
-            <button class="main__btn">RULES</button>
         </main>
 
         <main class="main-second main-second--hiden">
@@ -71,9 +77,9 @@
                 <h2 class="main-second__title-h2"></h2>
                 <button class="main-second__btn">PLAY AGAIN</button>
             </div>
-
-            <button class="main__btn">RULES</button>
         </main>
+
+        <button class="main__btn" id="rules">RULES</button>
 
         <script type="module" src="/src/ts/main.ts"></script>
     </body>
