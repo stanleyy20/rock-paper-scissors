@@ -8,7 +8,7 @@
         <link rel="icon" href="favicon.jpg" />
         <link rel="manifest" href="manifest.json" />
         <title>Rock-Paper-Scissor</title>
-      <script type="module" crossorigin src="/rock-paper-scissors/assets/index.e8145dbd.js"></script>
+      <script type="module" crossorigin src="/rock-paper-scissors/assets/index.da784efa.js"></script>
       <link rel="stylesheet" href="/rock-paper-scissors/assets/index.778c15e2.css">
     <link rel="manifest" href="/rock-paper-scissors/manifest.webmanifest"><script src="/rock-paper-scissors/registerSW.js"></script></head>
     <body>
@@ -37,27 +37,25 @@
         <main class="main">
             <div class="main__container">
                 <div class="main__choose main__choose--rock" id="rock" data-choice="rock">
-                    <div class="main__choose-bg">
+                    <div class="main__choose-bg" data-choice="rock">
                         <img src="/rock-paper-scissors/assets/icon-rock.e16feca1.svg" alt="rock" data-choice="rock" />
                     </div>
                 </div>
 
-                <div class="main__choose main__choose--paper">
-                    <div class="main__choose-bg">
-                        <img
-                            src="/rock-paper-scissors/assets/icon-paper.90d57903.svg"
-                            id="paper"
-                            alt="paper"
-                            data-choice="paper"
-                        />
+                <div class="main__choose main__choose--paper" id="paper" data-choice="paper">
+                    <div class="main__choose-bg" data-choice="paper">
+                        <img src="/rock-paper-scissors/assets/icon-paper.90d57903.svg" alt="paper" data-choice="paper" />
                     </div>
                 </div>
 
-                <div class="main__choose main__choose--scissors">
-                    <div class="main__choose-bg">
+                <div
+                    class="main__choose main__choose--scissors"
+                    id="scissors"
+                    data-choice="scissors"
+                >
+                    <div class="main__choose-bg" data-choice="scissors">
                         <img
                             src="/rock-paper-scissors/assets/icon-scissors.f778df73.svg"
-                            id="scissors"
                             alt="scissors"
                             data-choice="scissors"
                         />
