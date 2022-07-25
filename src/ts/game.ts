@@ -101,7 +101,7 @@ export class StartGame {
     }
 
     renderPlayersChoice(container: HTMLDivElement | null, event: any, AI: string, player: boolean) {
-        const main = document.createElement('div');
+        const resultScreen = document.createElement('div');
         const choice = document.createElement('div');
         const img: HTMLImageElement = document.createElement('img');
 
@@ -109,7 +109,7 @@ export class StartGame {
         const imgUrl = new URL(`/public/images/icon-${classNameModifire}.svg`, import.meta.url)
             .href;
 
-        main.classList.add(
+        resultScreen.classList.add(
             'main__choose',
             'main__choose--position',
             `main__choose--${classNameModifire}`
@@ -117,11 +117,11 @@ export class StartGame {
         choice.classList.add('main__choose-bg');
         img.src = imgUrl;
 
-        main.appendChild(choice);
+        resultScreen.appendChild(choice);
         choice.appendChild(img);
 
         if (container !== null) {
-            container.appendChild(main);
+            container.appendChild(resultScreen);
         }
     }
 
