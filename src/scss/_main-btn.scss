@@ -1,0 +1,20 @@
+.main-btn {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    cursor: pointer;
+    background-color: transparent;
+    border: 2px solid $header-outline;
+    padding: 10px 30px;
+    color: $white-text;
+    border-radius: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    @media (min-width: $medium) {
+        bottom: 10%;
+        left: 90%;
+    }
+}

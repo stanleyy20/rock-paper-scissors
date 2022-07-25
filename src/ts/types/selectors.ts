@@ -25,19 +25,19 @@ export const SELECTOR: selectors = {
     PAPER: '#paper',
     SCISSORS: '#scissors',
     SCORE: '#score',
-    SELECTION_SCREEN: '.main',
-    RESULT_SCREEN: '.main-second',
+    SELECTION_SCREEN: '.selection-screen',
+    RESULT_SCREEN: '.result-screen',
     PLAYER_CHOOSE_CONTAINER: '#player',
     AI_CHOOSE_CONTAINER: '#ai',
-    WIN_OR_LOSE_TITLE: '.main-second__title-h2',
-    RESET_BUTTON: '.main-second__btn',
+    WIN_OR_LOSE_TITLE: '.result-screen__title-h2',
+    RESET_BUTTON: '.result-screen__btn',
     RULES_BUTTON: '#rules',
     POPUP: '.popup',
     CLOSE_POPUP_BUTTON: '.close-btn',
 };
 
 export const CLASS_NAME: className = {
-    SELECTION_SCREEN_CLASS_HIDEN: 'main--hiden',
-    RESULT_SCREEN_CLASS_HIDEN: 'main-second--hiden',
+    SELECTION_SCREEN_CLASS_HIDEN: 'selection-screen--hiden',
+    RESULT_SCREEN_CLASS_HIDEN: 'result-screen--hiden',
     POPUP_HIDEN: 'popup--hiden',
 };

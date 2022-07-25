@@ -110,11 +110,11 @@ export class StartGame {
             .href;
 
         resultScreen.classList.add(
-            'main__choose',
-            'main__choose--position',
-            `main__choose--${classNameModifire}`
+            'selection-screen__choose',
+            'selection-screen__choose--position',
+            `selection-screen__choose--${classNameModifire}`
         );
-        choice.classList.add('main__choose-bg');
+        choice.classList.add('selection-screen__choose-bg');
         img.src = imgUrl;
 
         resultScreen.appendChild(choice);
