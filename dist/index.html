@@ -8,8 +8,8 @@
         <link rel="icon" href="favicon.jpg" />
         <link rel="manifest" href="manifest.json" />
         <title>Rock-Paper-Scissor</title>
-      <script type="module" crossorigin src="/rock-paper-scissors/assets/index.da784efa.js"></script>
-      <link rel="stylesheet" href="/rock-paper-scissors/assets/index.778c15e2.css">
+      <script type="module" crossorigin src="/rock-paper-scissors/assets/index.172412bf.js"></script>
+      <link rel="stylesheet" href="/rock-paper-scissors/assets/index.22f9083a.css">
     <link rel="manifest" href="/rock-paper-scissors/manifest.webmanifest"><script src="/rock-paper-scissors/registerSW.js"></script></head>
     <body>
         <header class="header">
@@ -34,26 +34,34 @@
             </div>
         </div>
 
-        <main class="main">
-            <div class="main__container">
-                <div class="main__choose main__choose--rock" id="rock" data-choice="rock">
-                    <div class="main__choose-bg" data-choice="rock">
+        <main class="selection-screen">
+            <div class="selection-screen__container">
+                <div
+                    class="selection-screen__choose selection-screen__choose--rock"
+                    id="rock"
+                    data-choice="rock"
+                >
+                    <div class="selection-screen__choose-bg" data-choice="rock">
                         <img src="/rock-paper-scissors/assets/icon-rock.e16feca1.svg" alt="rock" data-choice="rock" />
                     </div>
                 </div>
 
-                <div class="main__choose main__choose--paper" id="paper" data-choice="paper">
-                    <div class="main__choose-bg" data-choice="paper">
+                <div
+                    class="selection-screen__choose selection-screen__choose--paper"
+                    id="paper"
+                    data-choice="paper"
+                >
+                    <div class="selection-screen__choose-bg" data-choice="paper">
                         <img src="/rock-paper-scissors/assets/icon-paper.90d57903.svg" alt="paper" data-choice="paper" />
                     </div>
                 </div>
 
                 <div
-                    class="main__choose main__choose--scissors"
+                    class="selection-screen__choose selection-screen__choose--scissors"
                     id="scissors"
                     data-choice="scissors"
                 >
-                    <div class="main__choose-bg" data-choice="scissors">
+                    <div class="selection-screen__choose-bg" data-choice="scissors">
                         <img
                             src="/rock-paper-scissors/assets/icon-scissors.f778df73.svg"
                             alt="scissors"
@@ -64,26 +72,26 @@
             </div>
         </main>
 
-        <main class="main-second main-second--hiden">
-            <div class="main-second__wrapper">
-                <div class="main-second__container">
-                    <div class="main-second__option-palece" id="player"></div>
+        <main class="result-screen result-screen--hiden">
+            <div class="result-screen__wrapper">
+                <div class="result-screen__container">
+                    <div class="result-screen__option-palece" id="player"></div>
                     <h3>YOU PICKED</h3>
                 </div>
 
-                <div class="main-second__container">
-                    <div class="main-second__option-palece" id="ai"></div>
-                    <h3>COMPUTER PICKED</h3>
+                <div class="result-screen__container result-screen__container--last">
+                    <div class="result-screen__option-palece" id="ai"></div>
+                    <h3>AI PICKED</h3>
                 </div>
-            </div>
 
-            <div class="main-second__result">
-                <h2 class="main-second__title-h2"></h2>
-                <button class="main-second__btn">PLAY AGAIN</button>
+                <div class="result-screen__result">
+                    <h2 class="result-screen__title-h2"></h2>
+                    <button class="result-screen__btn">PLAY AGAIN</button>
+                </div>
             </div>
         </main>
 
-        <button class="main__btn" id="rules" data-toggle="tab">RULES</button>
+        <button class="main-btn" id="rules" data-toggle="tab">RULES</button>
 
         
     </body>
