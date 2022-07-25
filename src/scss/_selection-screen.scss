@@ -74,9 +74,54 @@
             height: 100%;
             transform: translate(0, 0);
         }
+
+        &--animation {
+            transform: scale(4);
+            opacity: 0;
+            animation: show-ai-chocie 1s ease-in-out 1s forwards;
+        }
+
+        &--winning::after {
+            position: absolute;
+            content: '';
+            display: block;
+            width: 10%;
+            height: 10%;
+            background-color: lightblue;
+            opacity: 0;
+            border-radius: 50%;
+            z-index: -10;
+            animation: winning 1.5s ease-in-out 2.5s infinite alternate;
+        }
     }
 
     &--hiden {
         display: none;
+    }
+}
+
+@keyframes show-ai-chocie {
+    0% {
+        transform: scale(3);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes winning {
+    0% {
+        width: 10%;
+        height: 10%;
+        opacity: 0;
+    }
+
+    100% {
+        width: 160%;
+        height: 160%;
+        opacity: 0.2;
     }
 }

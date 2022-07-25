@@ -41,6 +41,7 @@ export class StartGame {
     choiceAI: string;
     playerChoice: string;
     playerOrAi: boolean;
+    whoWin: Array<string>;
 
     constructor() {
         this.rockButton = this.bindDomElement(ROCK);
@@ -63,6 +64,7 @@ export class StartGame {
         this.choiceAI = '';
         this.playerChoice = '';
         this.playerOrAi = true;
+        this.whoWin = [];
     }
 
     bindDomElement(selector: string): HTMLDivElement | null {
@@ -100,7 +102,13 @@ export class StartGame {
         return null;
     }
 
-    renderPlayersChoice(container: HTMLDivElement | null, event: any, AI: string, player: boolean) {
+    renderPlayersChoice(
+        container: HTMLDivElement | null,
+        event: any,
+        AI: string,
+        player: boolean,
+        whoWin: Array<string>
+    ) {
         const resultScreen = document.createElement('div');
         const choice = document.createElement('div');
         const img: HTMLImageElement = document.createElement('img');
@@ -114,6 +122,17 @@ export class StartGame {
             'selection-screen__choose--position',
             `selection-screen__choose--${classNameModifire}`
         );
+
+        if (!player) {
+            resultScreen.classList.add(`selection-screen__choose--animation`);
+        }
+
+        if (whoWin[0] === 'AI' && !player) {
+            resultScreen.classList.add(`selection-screen__choose--winning`);
+        } else if (whoWin[0] === 'PLAYER' && player) {
+            resultScreen.classList.add(`selection-screen__choose--winning`);
+        }
+
         choice.classList.add('selection-screen__choose-bg');
         img.src = imgUrl;
 
@@ -130,7 +149,8 @@ export class StartGame {
         AI: string,
         textContainer: HTMLDivElement | null,
         score: HTMLDivElement | null,
-        initialScore: number
+        initialScore: number,
+        whoWin: Array<string>
     ) {
         if (textContainer === null) return null;
         if (score === null) return null;
@@ -150,6 +170,8 @@ export class StartGame {
             textContainer.textContent = 'YOU LOSE';
             localStorage.setItem('score', String(initialScore - 3));
 
+            whoWin.push('AI');
+
             return null;
         }
 
@@ -160,6 +182,8 @@ export class StartGame {
         ) {
             textContainer.textContent = 'YOU WIN';
             localStorage.setItem('score', String(initialScore + 3));
+
+            whoWin.push('PLAYER');
 
             return null;
         }
@@ -176,19 +200,22 @@ export class StartGame {
             AI: string,
             textContainer: HTMLDivElement | null,
             score: HTMLDivElement | null,
-            initialScore: number
+            initialScore: number,
+            whoWin: Array<string>
         ) => void,
         renderPlayerChoice: (
             container: HTMLDivElement | null,
             event: any,
             AI: string,
-            playerOrAi: boolean
+            playerOrAi: boolean,
+            whoWin: Array<string>
         ) => void,
         renderAiChoice: (
             container: HTMLDivElement | null,
             event: any,
             AI: string,
-            playerOrAi: boolean
+            playerOrAi: boolean,
+            whoWin: Array<string>
         ) => void
     ) {
         if (button === null) {
@@ -206,11 +233,24 @@ export class StartGame {
                 this.choiceAI,
                 this.winOrLoseTitle,
                 this.score,
-                this.initialScore
+                this.initialScore,
+                this.whoWin
             );
-            renderPlayerChoice(this.playerChoiceContainer, event, this.choiceAI, this.playerOrAi);
+            renderPlayerChoice(
+                this.playerChoiceContainer,
+                event,
+                this.choiceAI,
+                this.playerOrAi,
+                this.whoWin
+            );
 
-            renderAiChoice(this.aiChoiceContainer, event, this.choiceAI, !this.playerOrAi);
+            renderAiChoice(
+                this.aiChoiceContainer,
+                event,
+                this.choiceAI,
+                !this.playerOrAi,
+                this.whoWin
+            );
         });
 
         return null;
@@ -236,6 +276,8 @@ export class StartGame {
             this.showHide(this.resultScreen, RESULT_SCREEN_CLASS_HIDEN);
             this.showHide(this.selectionScreen, SELECTION_SCREEN_CLASS_HIDEN);
             this.renderScore();
+
+            this.whoWin.pop();
         });
     }
 

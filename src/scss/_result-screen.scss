@@ -1,6 +1,9 @@
 .result-screen {
     width: 80%;
     margin: auto;
+    opacity: 0.1;
+
+    animation: show-result 0.5s ease-in-out forwards;
 
     @media (min-width: $medium) {
         margin-top: 60px;
@@ -70,7 +73,7 @@
         gap: 40px;
         margin-top: 60px;
         transform: scale(0);
-        animation: show-result-mobile 1s ease-in-out 0.1s forwards;
+        animation: show-result-mobile 1s ease-in-out 2s forwards;
 
         @media (min-width: $medium) {
             margin-top: 0;
@@ -79,7 +82,7 @@
             opacity: 0;
             transform: scale(0);
             align-items: center;
-            animation: show-result-desktop 1s ease-in-out 0.1s forwards;
+            animation: show-result-desktop 1s ease-in-out 2s forwards;
         }
     }
 
@@ -144,5 +147,15 @@
 
     100% {
         transform: scale(1);
+    }
+}
+
+@keyframes show-result {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
     }
 }
