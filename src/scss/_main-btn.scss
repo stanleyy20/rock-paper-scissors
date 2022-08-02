@@ -12,9 +12,21 @@
     border-radius: 10px;
     font-weight: 700;
     letter-spacing: 2px;
+    transition: color background-color 0.1s;
 
     @media (min-width: $medium) {
         bottom: 10%;
         left: 90%;
+        transition: color background-color 0.4s;
+
+        &:hover {
+            background-color: $white-text;
+            color: $dark-text;
+        }
+    }
+
+    &:active {
+        background-color: $white-text;
+        color: $dark-text;
     }
 }

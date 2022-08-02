@@ -1,7 +1,5 @@
 type selectors = {
-    ROCK: string;
-    PAPER: string;
-    SCISSORS: string;
+    GAME_BUTTONS: string;
     SCORE: string;
     SELECTION_SCREEN: string;
     RESULT_SCREEN: string;
@@ -16,14 +14,13 @@ type selectors = {
 
 type className = {
     SELECTION_SCREEN_CLASS_HIDEN: string;
+    SELECTION_SCREEN_CLASS_ANIMATION: string;
     RESULT_SCREEN_CLASS_HIDEN: string;
     POPUP_HIDEN: string;
 };
 
 export const SELECTOR: selectors = {
-    ROCK: '#rock',
-    PAPER: '#paper',
-    SCISSORS: '#scissors',
+    GAME_BUTTONS: '.selection-screen__choose',
     SCORE: '#score',
     SELECTION_SCREEN: '.selection-screen',
     RESULT_SCREEN: '.result-screen',
@@ -38,6 +35,7 @@ export const SELECTOR: selectors = {
 
 export const CLASS_NAME: className = {
     SELECTION_SCREEN_CLASS_HIDEN: 'selection-screen--hiden',
+    SELECTION_SCREEN_CLASS_ANIMATION: 'selection-screen--animation',
     RESULT_SCREEN_CLASS_HIDEN: 'result-screen--hiden',
     POPUP_HIDEN: 'popup--hiden',
 };

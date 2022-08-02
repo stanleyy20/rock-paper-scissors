@@ -1,9 +1,7 @@
 import { CLASS_NAME, SELECTOR } from './types/selectors';
 
 const {
-    PAPER,
-    ROCK,
-    SCISSORS,
+    GAME_BUTTONS,
     SCORE,
     SELECTION_SCREEN,
     RESULT_SCREEN,
@@ -19,10 +17,7 @@ const {
 const { SELECTION_SCREEN_CLASS_HIDEN, RESULT_SCREEN_CLASS_HIDEN, POPUP_HIDEN } = CLASS_NAME;
 
 export class StartGame {
-    //buttons
-    rockButton: HTMLDivElement | null;
-    paperButton: HTMLDivElement | null;
-    scissorsButton: HTMLDivElement | null;
+    gameButtons: NodeListOf<Element> | null;
     playAgainButton: HTMLDivElement | null;
     rulesButton: HTMLDivElement | null;
     closePopupButton: HTMLDivElement | null;
@@ -35,6 +30,7 @@ export class StartGame {
     aiChoiceContainer: HTMLDivElement | null;
     winOrLoseTitle: HTMLDivElement | null;
     popup: HTMLDivElement | null;
+
     // initial state
     initialScore: number;
     choiceForAI: Array<string>;
@@ -44,9 +40,7 @@ export class StartGame {
     whoWin: Array<string>;
 
     constructor() {
-        this.rockButton = this.bindDomElement(ROCK);
-        this.paperButton = this.bindDomElement(PAPER);
-        this.scissorsButton = this.bindDomElement(SCISSORS);
+        this.gameButtons = document.querySelectorAll(GAME_BUTTONS);
         this.playAgainButton = this.bindDomElement(RESET_BUTTON);
         this.rulesButton = this.bindDomElement(RULES_BUTTON);
         this.closePopupButton = this.bindDomElement(CLOSE_POPUP_BUTTON);
@@ -192,7 +186,7 @@ export class StartGame {
     }
 
     bindFunctionToGameButton(
-        button: HTMLDivElement | null,
+        buttons: NodeListOf<Element> | null,
         showHideScreen: (elemnet: HTMLDivElement | null, className: string) => void,
         showHideScreenSecond: (elemnet: HTMLDivElement | null, className: string) => void,
         winOrLoseRules: (
@@ -218,40 +212,42 @@ export class StartGame {
             whoWin: Array<string>
         ) => void
     ) {
-        if (button === null) {
+        if (buttons === null) {
             console.warn(`don't find button`);
             return null;
         }
 
-        button.addEventListener('click', (event: any) => {
-            showHideScreen(this.selectionScreen, SELECTION_SCREEN_CLASS_HIDEN);
+        buttons.forEach((button) =>
+            button.addEventListener('click', (event: any) => {
+                showHideScreen(this.selectionScreen, SELECTION_SCREEN_CLASS_HIDEN);
 
-            showHideScreenSecond(this.resultScreen, RESULT_SCREEN_CLASS_HIDEN);
+                showHideScreenSecond(this.resultScreen, RESULT_SCREEN_CLASS_HIDEN);
 
-            winOrLoseRules(
-                event,
-                this.choiceAI,
-                this.winOrLoseTitle,
-                this.score,
-                this.initialScore,
-                this.whoWin
-            );
-            renderPlayerChoice(
-                this.playerChoiceContainer,
-                event,
-                this.choiceAI,
-                this.playerOrAi,
-                this.whoWin
-            );
+                winOrLoseRules(
+                    event,
+                    this.choiceAI,
+                    this.winOrLoseTitle,
+                    this.score,
+                    this.initialScore,
+                    this.whoWin
+                );
+                renderPlayerChoice(
+                    this.playerChoiceContainer,
+                    event,
+                    this.choiceAI,
+                    this.playerOrAi,
+                    this.whoWin
+                );
 
-            renderAiChoice(
-                this.aiChoiceContainer,
-                event,
-                this.choiceAI,
-                !this.playerOrAi,
-                this.whoWin
-            );
-        });
+                renderAiChoice(
+                    this.aiChoiceContainer,
+                    event,
+                    this.choiceAI,
+                    !this.playerOrAi,
+                    this.whoWin
+                );
+            })
+        );
 
         return null;
     }
@@ -281,29 +277,29 @@ export class StartGame {
         });
     }
 
+    resetScore() {
+        this.score?.addEventListener('click', () => {
+            localStorage.setItem('score', '0');
+            this.renderScore();
+        });
+    }
+
+    // addHidenClass(screen: HTMLDivElement | null, className: string) {
+    //     if (screen) {
+    //         const timeout = setTimeout(() => {
+    //             screen.classList.add(className);
+    //         }, 900);
+    //     }
+    // }
+
     initial() {
+        this.resetScore();
         this.randomChoiceForAI(this.choiceForAI);
         this.playAgain();
         this.renderScore();
 
         this.bindFunctionToGameButton(
-            this.rockButton,
-            this.showHide,
-            this.showHide,
-            this.winOrLoseRules,
-            this.renderPlayersChoice,
-            this.renderPlayersChoice
-        );
-        this.bindFunctionToGameButton(
-            this.paperButton,
-            this.showHide,
-            this.showHide,
-            this.winOrLoseRules,
-            this.renderPlayersChoice,
-            this.renderPlayersChoice
-        );
-        this.bindFunctionToGameButton(
-            this.scissorsButton,
+            this.gameButtons,
             this.showHide,
             this.showHide,
             this.winOrLoseRules,
